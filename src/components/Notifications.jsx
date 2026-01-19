@@ -146,6 +146,7 @@ const Notifications = () => {
                     !n?.isRead ? 'bg-gray-200' : ''
                   }`}
                   onClick={() => !n?.isRead && handleReadMessage(n?._id, index)}
+                  to={'/messenger'}
                 >
                   <img
                     className="w-8 h-8 rounded-full"

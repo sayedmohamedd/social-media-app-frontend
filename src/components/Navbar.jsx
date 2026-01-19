@@ -1,6 +1,6 @@
 // Hooks
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 // Actions
 import { logout } from './../redux/features/user/userSlice';
@@ -21,17 +21,10 @@ const Navbar = () => {
   const [search, setSearch] = useState('');
   const [users, setUsers] = useState([]);
   const [showDropList, setShowDropList] = useState(false);
-  const navigate = useNavigate();
 
   // Refs
   const dropList = useRef(null);
   const searchListComponent = useRef(null);
-
-  // Logout
-  const handleLogout = () => {
-    dispatch(logout());
-    setTimeout(() => navigate('/login'), 0);
-  };
 
   useEffect(() => {
     search &&
@@ -151,7 +144,7 @@ const Navbar = () => {
                     <Link to="/messenger">Messenger</Link>
                   </li>
                   <li onClick={() => setShowDropList(false)}>
-                    <button onClick={handleLogout}>Logout</button>
+                    <button onClick={() => dispatch(logout())}>Logout</button>
                   </li>
                   <i>
                     <div className="relative md:hidden items-center z-40">
@@ -177,7 +170,7 @@ const Navbar = () => {
             )}
             {user && (
               <button
-                onClick={handleLogout}
+                onClick={() => dispatch(logout())}
                 className="px-3.5 py-1.5 rounded-lg text-white bg-primary hidden md:flex"
               >
                 Logout
